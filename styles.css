@@ -17,14 +17,14 @@
     display: grid;
     justify-content: center;
     align-content: center;
-    justify-content: center; 
+    justify-items: center; 
     grid-template-columns: repeat(3, auto);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
  }
 
  .board.x .cell:not(.x):not(.circle):hover::after,
  .board.x .cell:not(.x):not(.circle):hover::before, 
  .board.circle .cell:not(.x):not(.circle):hover::after, 
- .board.circle .cell:not(.x):not(.circle):hover::before {
+ .board.x .cell:not(.x):not(.circle):hover::before {
    background: rgba(255,255,255,0.3) !important; 
  }
 
@@ -33,39 +33,40 @@
  .cell{
     width: 100px;
     height: 100px;
-    border: 2px solid black;
+    border: 2px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
  }
-/* clique não permitido, pos a celula ja esta selecionada */
+/* clique não permitido, pós a celula ja esta selecionada com uma jogada */
  .cell.x, 
  .cell.circle{
     cursor: not-allowed;
  }
 
+ /* tirar a borda superio */
  .cell:nth-child(1),
  .cell:nth-child(2),
  .cell:nth-child(3) {
     border-top: none;
  } 
 
-
+/* Retira aborda esquerda */
  .cell:nth-child(1),
  .cell:nth-child(4),
  .cell:nth-child(7) {
     border-left: none;
  }
 
- 
+ /* Ritrar a borda de baixo */
  .cell:nth-child(7),
  .cell:nth-child(8),
  .cell:nth-child(9) {
     border-bottom: none;
  }
 
-
+/* Retirar a borda da direita */
  .cell:nth-child(3),
  .cell:nth-child(6),
  .cell:nth-child(9) {
@@ -86,12 +87,12 @@
  }
 
  .cell.x::before,
-.board.x.cell:hover::before {
+.board.x .cell:not(.x):not(circle):hover::before {
     transform: rotate(45deg);
  }
 
- .cell.cell.x::after,
- .board.x .cell:hover::after{
+ .cell.x::after,
+ .board.x .cell:not(.x):not(circle):hover::after{
     transform: rotate(-45deg);
  }
 
@@ -100,8 +101,6 @@
   .cell.circle::after
   .board.circle .cell:not(.x):not(.circle):hover::after,
   .board.circle .cell:not(.x):not(.circle):hover::before {
-
-   
      content: "";
      height: calc(100px * 0.9);
      width: calc(100px * 0.9);
@@ -114,7 +113,7 @@
 
  /* Mensagem de Vitória */
 .winning-message {
-display: flex;
+display: none;
 position: fixed;
 top: 0;
 left: 0;
@@ -137,7 +136,12 @@ flex-direction: column;
     color: orange;
 }
 
-.winning-message-buton{
+.winning-message-buton:hover{
     color: rgba(65,185,131,1);
     background-color: orange;
+}
+
+.winning-message-text {
+    color: rgba(65,185,131,1);
+    font-size: 5rem;
 }
